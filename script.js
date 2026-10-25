@@ -70,51 +70,20 @@ window.addEventListener("scroll", updateActiveLink, {
 window.addEventListener("load", updateActiveLink);
 updateActiveLink();
 
-// LIGHT / DARK THEME
+
+ // LIGHT / DARK THEME
 const themeBtn = document.getElementById("theme-btn");
-
-function updateThemeButton(isLight) {
-    if (!themeBtn) return;
-
-    themeBtn.textContent = isLight ? "☀" : "☾";
-    themeBtn.setAttribute(
-        "aria-label",
-        isLight ? "Switch to dark theme" : "Switch to light theme"
-    );
-    themeBtn.setAttribute("aria-pressed", String(isLight));
-}
-
-// RESTORE SAVED THEME
-let savedTheme = null;
-
-try {
-    savedTheme = localStorage.getItem("portfolio-theme");
-} catch (error) {
-    savedTheme = null;
-}
-
-if (savedTheme === "light") {
-    document.body.classList.add("light-mode");
-} else if (savedTheme === "dark") {
-    document.body.classList.remove("light-mode");
-}
-
-updateThemeButton(document.body.classList.contains("light-mode"));
 
 if (themeBtn) {
     themeBtn.addEventListener("click", () => {
         const isLight = document.body.classList.toggle("light-mode");
 
-        updateThemeButton(isLight);
-
-        try {
-            localStorage.setItem(
-                "portfolio-theme",
-                isLight ? "light" : "dark"
-            );
-        } catch (error) {
-            // Theme switching still works if storage is unavailable.
-        }
+        themeBtn.textContent = isLight ? "☀" : "☾";
+        themeBtn.setAttribute(
+            "aria-label",
+            isLight ? "Switch to dark theme" : "Switch to light theme"
+        );
+        themeBtn.setAttribute("aria-pressed", String(isLight));
     });
 }
 
